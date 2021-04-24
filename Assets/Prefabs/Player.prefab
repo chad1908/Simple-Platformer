@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7203583979135611438}
   - component: {fileID: 7203583979135611436}
   - component: {fileID: 7374951385562034544}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,4 +166,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 14
-  acceleration: 6
+  accel: 6
