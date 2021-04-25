@@ -120,5 +120,4 @@ public class MovementController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
     }
-
 }
