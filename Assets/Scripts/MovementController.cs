@@ -11,6 +11,8 @@ public class MovementController : MonoBehaviour
     public float jumpDurationThreshold = 0.25f;
     public float speed = 14f;
     public float accel = 6f;
+    public float airAccel = 3f;
+    public float jump = 14f;
     private float jumpDuration;
     private float rayCastLengthCheck = 0.05f;
     private float width;
@@ -52,6 +54,53 @@ public class MovementController : MonoBehaviour
         {
             return false;
         }   
+    }
+
+    public bool isWallLeftOrRight()
+    {
+        bool wallOnLeft = Physics2D.Raycast(new Vector2(transform.position.x - width, transform.position.y), -Vector2.right, rayCastLengthCheck);
+        bool wallOnRight = Physics2D.Raycast(new Vector2(transform.position.x + width, transform.position.y), Vector2.right, rayCastLengthCheck);
+
+        if (wallOnLeft || wallOnRight)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool isTouchingGroundOrWall()
+    {
+        if (PlayerIsGrounded() || isWallLeftOrRight())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    //return an int based on whether the wall is to the left or right of the players position
+    public int getWallDirection()
+    {
+        bool isWallLeft = Physics2D.Raycast(new Vector2(transform.position.x - width, transform.position.y), -Vector2.right, rayCastLengthCheck);
+        bool isWallRight = Physics2D.Raycast(new Vector2(transform.position.x + width, transform.position.y), Vector2.right, rayCastLengthCheck);
+
+        if (isWallLeft)
+        {
+            return -1;
+        }
+        else if (isWallRight)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     private void Update()
@@ -97,11 +146,22 @@ public class MovementController : MonoBehaviour
     private void FixedUpdate()
     {
         //This will be used to hold ground and air velocity values.
-        var acceleration = accel;
+        //var acceleration = accel;
         var xVelocity = 0f;
+        var yVelocity = 0f;
+
+        var acceleration = 0f;
+        if(PlayerIsGrounded())
+        {
+            acceleration = accel;
+        }
+        else
+        {
+            acceleration = airAccel;
+        }
 
         //Sets velocity to 0 if there is no input to prevent the player from sliding.
-        if (input.x == 0)
+        if (PlayerIsGrounded() && input.x == 0)
         {
             xVelocity = 0f;
         }
@@ -109,10 +169,26 @@ public class MovementController : MonoBehaviour
         {
             xVelocity = rb.velocity.x;
         }
+
+        if (isTouchingGroundOrWall() && input.y == 1)
+        {
+            yVelocity = jump;
+        }
+        else
+        {
+            yVelocity = rb.velocity.y;
+        }
+
         //Adds acceleration to the player so they can move.
         rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x) * acceleration, 0));
+
         //Controls the player velocity.
-        rb.velocity = new Vector2(xVelocity, rb.velocity.y);
+        rb.velocity = new Vector2(xVelocity, yVelocity);
+
+        if (isWallLeftOrRight() && !PlayerIsGrounded() && input.y ==1)
+        {
+            rb.velocity = new Vector2(-getWallDirection() * speed * 0.75f, rb.velocity.y);
+        }
 
         //
         if (isJumping && jumpDuration < jumpDurationThreshold)
