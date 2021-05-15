@@ -17,7 +17,7 @@ public class MovementController : MonoBehaviour
     private float rayCastLengthCheck = 0.05f;
     private float width;
     private float height;
-    private Vector2 input;
+    private Vector3 input;
     private SpriteRenderer sr;
     private Rigidbody2D rb;
     private Animator animator;
@@ -141,6 +141,14 @@ public class MovementController : MonoBehaviour
 
         //If the player holds jump longer than the threshold the input is set to 0.
         if (jumpDuration > jumpDurationThreshold) input.y = 0f;
+
+        //When leftShit is pressed the player is moved 2 units in the direction of the input.
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            float dashDistance = 2f;
+            transform.position += input * dashDistance;
+            Debug.Log("dash!");
+        }
     }
 
     private void FixedUpdate()
@@ -160,7 +168,7 @@ public class MovementController : MonoBehaviour
             acceleration = airAccel;
         }
 
-        //Sets velocity to 0 if there is no input to prevent the player from sliding.
+        //Normalise the xVelocity to 0 over time if there is no input to prevent the player from sliding.
         if (PlayerIsGrounded() && input.x == 0)
         {
             xVelocity = 0f;
@@ -180,12 +188,12 @@ public class MovementController : MonoBehaviour
         }
 
         //Adds acceleration to the player so they can move.
-        rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x) * acceleration, 0));
+        rb.AddForce(new Vector3(((input.x * speed) - rb.velocity.x) * acceleration, 0));
 
         //Controls the player velocity.
-        rb.velocity = new Vector2(xVelocity, yVelocity);
+        rb.velocity = new Vector3(xVelocity, yVelocity);
 
-        if (isWallLeftOrRight() && !PlayerIsGrounded() && input.y ==1)
+        if (isWallLeftOrRight() && !PlayerIsGrounded() && input.y == 1)
         {
             rb.velocity = new Vector2(-getWallDirection() * speed * 0.75f, rb.velocity.y);
         }
