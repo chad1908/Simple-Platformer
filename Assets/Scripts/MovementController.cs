@@ -7,6 +7,7 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
     public bool isJumping;
+    public bool hasDash;
     public float jumpSpeed = 8f;
     public float jumpDurationThreshold = 0.25f;
     public float speed = 14f;
@@ -142,12 +143,19 @@ public class MovementController : MonoBehaviour
         //If the player holds jump longer than the threshold the input is set to 0.
         if (jumpDuration > jumpDurationThreshold) input.y = 0f;
 
-        //When leftShit is pressed the player is moved 2 units in the direction of the input.
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        //When leftShit is pressed the player is moved 2 units in the direction of the input along the x axis.
+        if (hasDash == false)
         {
-            float dashDistance = 2f;
-            transform.position += input * dashDistance;
-            Debug.Log("dash!");
+           
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                float dashDistance = 2f;
+                transform.position += input * dashDistance;
+                Debug.Log("dash!");
+            }
         }
     }
 
