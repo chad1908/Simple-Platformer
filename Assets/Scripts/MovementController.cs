@@ -21,7 +21,7 @@ public class MovementController : MonoBehaviour
     private Vector3 input;
     private SpriteRenderer sr;
     private Rigidbody2D rb;
-    private Animator animator;
+    public Animator animator;
 
     private void Awake()
     {
@@ -110,6 +110,8 @@ public class MovementController : MonoBehaviour
         input.x = Input.GetAxis("Horizontal");
         input.y = Input.GetAxis("Jump");
 
+        animator.SetFloat("Speed", Mathf.Abs(input.x));
+
         //Determines which way the sprite should be facing according to the x axis.
         if (input.x > 0f)
         {
@@ -121,13 +123,17 @@ public class MovementController : MonoBehaviour
         }
 
         //as long as jump is held time.deltaTime will increment jump duration.
-        if (input.y >=1f)
+        if (input.y >= 1f)
         {
             jumpDuration += Time.deltaTime;
+            animator.SetBool("isJumping", true);
+            Debug.Log("Anim1");
         }
         else
         {
             isJumping = false;
+            animator.SetBool("isJumping", false);
+            Debug.Log("Anim2");
             jumpDuration = 0f;
         }
 
@@ -138,6 +144,8 @@ public class MovementController : MonoBehaviour
             {
                 isJumping = true;
             }
+            animator.SetBool("isOnWall", false);
+            Debug.Log("Anim3");
         }
 
         //If the player holds jump longer than the threshold the input is set to 0.
@@ -204,6 +212,20 @@ public class MovementController : MonoBehaviour
         if (isWallLeftOrRight() && !PlayerIsGrounded() && input.y == 1)
         {
             rb.velocity = new Vector2(-getWallDirection() * speed * 0.75f, rb.velocity.y);
+            animator.SetBool("isOnWall", false);
+            animator.SetBool("isJumping", true);
+            Debug.Log("Anim4");
+        }
+        else if (!isWallLeftOrRight())
+        {
+            animator.SetBool("isOnWall", false);
+            animator.SetBool("isJumping", true);
+            Debug.Log("Anim5");
+        }
+        if (isWallLeftOrRight() && !PlayerIsGrounded())
+        {
+            animator.SetBool("isOnWall", true);
+            Debug.Log("Anim6");
         }
 
         //
