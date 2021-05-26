@@ -127,13 +127,13 @@ public class MovementController : MonoBehaviour
         {
             jumpDuration += Time.deltaTime;
             animator.SetBool("isJumping", true);
-            Debug.Log("Anim1");
+            //Debug.Log("Anim1");
         }
         else
         {
             isJumping = false;
             animator.SetBool("isJumping", false);
-            Debug.Log("Anim2");
+            //Debug.Log("Anim2");
             jumpDuration = 0f;
         }
 
@@ -145,7 +145,7 @@ public class MovementController : MonoBehaviour
                 isJumping = true;
             }
             animator.SetBool("isOnWall", false);
-            Debug.Log("Anim3");
+            //Debug.Log("Anim3");
         }
 
         //If the player holds jump longer than the threshold the input is set to 0.
@@ -162,6 +162,7 @@ public class MovementController : MonoBehaviour
             {
                 float dashDistance = 2f;
                 transform.position += input * dashDistance;
+                hasDash = false;
                 Debug.Log("dash!");
             }
         }
@@ -214,18 +215,18 @@ public class MovementController : MonoBehaviour
             rb.velocity = new Vector2(-getWallDirection() * speed * 0.75f, rb.velocity.y);
             animator.SetBool("isOnWall", false);
             animator.SetBool("isJumping", true);
-            Debug.Log("Anim4");
+            //Debug.Log("Anim4");
         }
         else if (!isWallLeftOrRight())
         {
             animator.SetBool("isOnWall", false);
             animator.SetBool("isJumping", true);
-            Debug.Log("Anim5");
+            //Debug.Log("Anim5");
         }
         if (isWallLeftOrRight() && !PlayerIsGrounded())
         {
             animator.SetBool("isOnWall", true);
-            Debug.Log("Anim6");
+            //Debug.Log("Anim6");
         }
 
         //
