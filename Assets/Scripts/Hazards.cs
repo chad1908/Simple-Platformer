@@ -23,6 +23,8 @@ public class Hazards : MonoBehaviour
 
             //Destroy the colliding object
             Destroy(collision.gameObject);
+
+            gameManager.GMinstance.restartLevel(1.25f);
         }
     }
 }
