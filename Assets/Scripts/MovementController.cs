@@ -18,10 +18,12 @@ public class MovementController : MonoBehaviour
     private float rayCastLengthCheck = 0.05f;
     private float width;
     private float height;
+    public Animator animator;
+    public GameObject dashEffect;
     private Vector3 input;
     private SpriteRenderer sr;
     private Rigidbody2D rb;
-    public Animator animator;
+    
 
     private void Awake()
     {
@@ -154,7 +156,7 @@ public class MovementController : MonoBehaviour
         //When leftShit is pressed the player is moved 2 units in the direction of the input along the x axis.
         if (hasDash == false)
         {
-           
+            
         }
         else
         {
@@ -162,6 +164,7 @@ public class MovementController : MonoBehaviour
             {
                 float dashDistance = 2f;
                 transform.position += input * dashDistance;
+                Instantiate(dashEffect, transform.position, Quaternion.identity);
                 hasDash = false;
                 Debug.Log("dash!");
             }

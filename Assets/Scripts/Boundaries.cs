@@ -8,6 +8,7 @@ public class Boundaries : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            //simply sets the player jump to 0 when collising with a boundary. (this is used to keep the player in the game scene)
             GameObject player = GameObject.Find("Player");
             MovementController movementController = player.GetComponent<MovementController>();
             movementController.jump = 0;
