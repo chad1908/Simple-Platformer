@@ -174,7 +174,6 @@ public class MovementController : MonoBehaviour
     private void FixedUpdate()
     {
         //This will be used to hold ground and air velocity values.
-        //var acceleration = accel;
         var xVelocity = 0f;
         var yVelocity = 0f;
 
