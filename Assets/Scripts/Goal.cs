@@ -9,7 +9,19 @@ public class Goal : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene(+1);
+            Scene currentScene = SceneManager.GetActiveScene();
+            string sceneName = currentScene.name;
+
+            //SceneManager.LoadScene(+1);
+            if (sceneName == "SampleScene")
+            {
+                SceneManager.LoadScene("Level2");
+            }
+            else if (sceneName == "Level2")
+            {
+                SceneManager.LoadScene("Level2");
+            }
+
         }
     }
 }
