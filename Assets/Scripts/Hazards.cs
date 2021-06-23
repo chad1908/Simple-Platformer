@@ -18,17 +18,17 @@ public class Hazards : MonoBehaviour
         //Check to make sure the colliding object is the player
         if (collision.transform.tag == "Player")
         {
+            //Destroy the colliding object
+            Destroy(collision.gameObject);
+
             //sets the player jump to 0 on collision to prevent a bug that allowed the player to jump on hazards. (this simply allows time for the gameObject to be destroyed)
-            GameObject player = GameObject.Find("Player");
-            MovementController movementController = player.GetComponent<MovementController>();
-            movementController.jump = 0;
-            Debug.Log("jump set to 0");
+            //GameObject player = GameObject.Find("Player");
+            //MovementController movementController = player.GetComponent<MovementController>();
+            //movementController.jump = 0;
+            //Debug.Log("jump set to 0");
 
             //instantiate the death particles at the point of collision.
             Instantiate(playerDeathParticles, collision.contacts[0].point, Quaternion.identity);
-
-            //Destroy the colliding object
-            Destroy(collision.gameObject);
 
             gameManager.GMinstance.restartLevel(1.25f);
         }

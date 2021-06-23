@@ -23,7 +23,14 @@ public class MovementController : MonoBehaviour
     private Vector3 input;
     private SpriteRenderer sr;
     private Rigidbody2D rb;
-    
+    //Transform arrowTrapPrefab;
+
+
+    //public void Start()
+    //{
+    //    var Trap = Instantiate(arrowTrapPrefab) as Transform;
+    //    Physics2D.IgnoreCollision()
+    //}
 
     private void Awake()
     {

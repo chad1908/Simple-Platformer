@@ -6,8 +6,9 @@ public class arrowSpawner : MonoBehaviour
 {
     public arrowScript arrowPrefab;
     public float arrowSpeed;
-    private float time = 0;
     public float arrowDelay;
+    private float time = 0;
+
 
     public bool shootLeft = false;
     public bool shoot;
@@ -22,7 +23,7 @@ public class arrowSpawner : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    { 
         if (shoot == true)
         {
             if (time < Time.time)
@@ -42,18 +43,35 @@ public class arrowSpawner : MonoBehaviour
         }
     }
 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-        {
-            shoot = true;
+        { 
+            StartCoroutine(firstShotDelay());   
         }
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            shoot = false;
+            StartCoroutine(exitDelay());
         }
+    }
+
+    IEnumerator firstShotDelay(float firstShotDelayTimer = 0.5f)
+    {
+        yield return new WaitForSeconds(firstShotDelayTimer);
+        shoot = true;
+        //Debug.Log("SHOOOOTING!!!");
+    }
+
+    //had to make an exit delay as the delay from the first shot would cause the shooting to never be set to false.
+    IEnumerator exitDelay(float exitDelayTimer = 0.6f)
+    {
+        yield return new WaitForSeconds(exitDelayTimer);
+        shoot = false;
+        //Debug.Log("EXIIITTTTT!!!");
     }
 }
