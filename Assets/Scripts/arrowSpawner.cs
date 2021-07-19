@@ -60,7 +60,7 @@ public class arrowSpawner : MonoBehaviour
         }
     }
 
-    IEnumerator firstShotDelay(float firstShotDelayTimer = 0.5f)
+    IEnumerator firstShotDelay(float firstShotDelayTimer = 0.2f)
     {
         yield return new WaitForSeconds(firstShotDelayTimer);
         shoot = true;
@@ -68,7 +68,7 @@ public class arrowSpawner : MonoBehaviour
     }
 
     //had to make an exit delay as the delay from the first shot would cause the shooting to never be set to false.
-    IEnumerator exitDelay(float exitDelayTimer = 0.6f)
+    IEnumerator exitDelay(float exitDelayTimer = 0.3f)
     {
         yield return new WaitForSeconds(exitDelayTimer);
         shoot = false;
