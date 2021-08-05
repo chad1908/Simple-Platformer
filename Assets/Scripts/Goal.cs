@@ -19,7 +19,7 @@ public class Goal : MonoBehaviour
             }
             else if (sceneName == "Level2")
             {
-                SceneManager.LoadScene("Level2");
+                SceneManager.LoadScene("Level3");
             }
 
         }

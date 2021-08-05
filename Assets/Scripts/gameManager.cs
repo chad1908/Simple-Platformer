@@ -40,6 +40,10 @@ public class gameManager : MonoBehaviour
         {
             SceneManager.LoadScene("Level2");
         }
+        else
+        {
+            SceneManager.LoadScene("Level3");
+        }
 
     }
 }

@@ -11,6 +11,7 @@ public class arrowSpawner : MonoBehaviour
 
 
     public bool shootLeft = false;
+    public bool shootUp = false;
     public bool shoot;
 
     private Vector2 dir2;
@@ -42,7 +43,6 @@ public class arrowSpawner : MonoBehaviour
             }
         }
     }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
