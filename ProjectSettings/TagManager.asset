@@ -8,6 +8,7 @@ TagManager:
   - Boundaries
   - Arrow
   - Hazard
+  - GM
   layers:
   - Default
   - TransparentFX

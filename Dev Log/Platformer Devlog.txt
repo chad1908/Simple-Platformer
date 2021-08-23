@@ -1,0 +1,245 @@
+***************NOTES****************
+for invisible wall add a tag to the wall and a collision statement on the player that disables jump when on the wall. (Done)
+
+for signs I want a basic press e to interact then some text that shows in a bubble.
+checkpoint system make a sign that explains how dark signs are checkpoints (maybe put a tag over the checkpoint sign)
+make a ladder script to climb into a tree level
+
+on dash pickup flash text that shows keybind to use instead of a sign. or a sign before the dash explaining it
+
+make it so dash ability orb respawns after a timer
+
+remake sprites and use big brush then resize***
+
+make tut signs dissapear after a slight delay
+
+slow mo box trigger that slows me down before hitting the goal then explosion animation on last goal.
+	-put in goal script with level checks.
+
+fix the bug that allows the player top jump on triggers
+
+if (arrow hits goal)
+destroy goal 
+destroy arrow death particle
+
+make easter egg guy have an animation of him turning around and saying hi. and warn you to be careful
+************************************
+
+
+
+2021-04-23
+- Added a basic movement that allows the player to move around the scene
+
+2021-04-24
+- Improved on the basic movement adding the ability to incrementally jump based on how long the jump button is pressed
+- Also worked on the air control to make it feel smoother.
+- Added a script that will be attached to the camera and will force a camera to follow the player
+	- Added a tracking speed variable player to become offset from the center of the camera (this simply gives it a nice effect) 
+		
+
+2021-04-25
+- Worked on getting the player to teleport to a new spawn location in the same scene when the player reaches the goal.
+	-setup a basic goal that sends the player to a spawn object when the collider on the goal is triggered.
+
+-Added a hazard script that can be attached to any gameobject the player will be destroyed by
+	-Right now the only thing the script is attatcheds to is the water, so when the player collides with the water the player sprite is destroyed
+
+-Added a death particle that will be triggered when the player object is destroyed.
+
+-Added a run animation for the main character.
+-Added a jump animation for the main character.
+
+2021-04-26
+-Added code to the hazard script that swaps the player sprite with a death particle that shoots red pixels in a cone upwards.
+
+-updated the movement script to have smoother air control, previously the player would keep the same momentum no matter what movement they used.
+The movement is now a lot smoother and the player looses speed while in the air.
+
+-Added the functionality to jump off of walls, this took a bit of tweaking to get working properly but gives a nice feel.
+
+-setup new test stage to test the wall jumping and make sure it feels nice.
+
+
+2021-04-29
+- Started mapping the first level
+	-Laid out some signs that will later be the tutorial for the game (each sign will have different information to help the player progress)
+
+2021-04-30
+-Finished a base layout for the first level which will act as a tutorial level
+-Stated working on the second
+	-This level will follow a different theme than the first level and will slightly increase in difficulty.
+
+2021-05-11
+-Added the camera follow script to the second level, and attached the player.
+	-This will make it so when the player spawns in the second level the camera will still follow the player.
+
+-continued on the second level design
+	-Added more challenging obstacles.
+
+- Added a friction material to the player prefab.
+	- When on walls the player would slide off very fast so this material allows the player to have more time to react when doing wall jumps.
+
+- Added a new sign sprite that will be used to give the player a sense of direction when it may not be obvious.
+
+2021-05-12
+- Added a parallax script that will scroll the background when the player is moving in the game to give a nice look.
+
+2021-05-13
+- Made the background image longer by duplicating it and then repeating it to ensure it covers the whole level.
+
+2021-05-14
+- Added a pickup script that will attached to objects that will give the player a power up.
+
+- Added a dash ability to the player.
+	-this will be activated by the pickup.
+
+2021-05-17
+- Changed the pickup script name to dashAbility
+	- This change was made as the script will only give the player the ability to dash.
+
+- Added a bool that controls whether the player has the ability to dash, the player can obtain the dash by grabbing the pickup in the game scene.
+
+2021-05-19
+-Added IdleAnimation
+-Added SlidingAnimation
+
+-Added a very basic pickup script for the dash ability(this will be changed in the future)
+
+-Added code to the movementController that will trigger animation state changes based on the players movement.
+	- Worked on getting animations playing at the right time during gameplay.
+	
+2021-05-25
+-Added a new section to level 1 that will show the player how to use the dash ability and requires it to continue through the level.
+	-Added new terrain to the level for aesthetics.
+
+-Changed the dash ability to disable after one use to avoid ability spam.
+
+-Made a boundaries script that will be used to make boundaries that the player cannot pass, this will help prevent the player from falling off the level.
+
+2021-05-28
+-Added a game manager that only has the functionality to respawn the player at the moment.
+	-the game manager checks what scene the player is currently on and on death the level is restarted.
+
+2021-05-31
+-Added a new spike prefab that will be used as a hazard in the game
+
+-Continued on level 2 level design.
+
+2021-06-03
+- Added a new dash particle that gives the players dash a bit more of a flashy look
+	-Rigged the particles to only spawn and play when the player dashes.
+
+-discovered a bug that allows the player to jump off of hazard objects that should kill the player on collision
+	-Fixed the bug by setting the players jump to 0 when collising with a hazard object, this allows time for the player object to be destroyed
+
+-Added a Main menu scene as a temporary placeholder.
+
+2021-06-07
+- Added a new button sprite for any menus in the game.
+
+- Added a play button to the main menu that starts the game on the main scene.
+- Added a options button to the main menu.
+	- Added a slider to the options menu that I will use as a volume slider.
+	- Added a credits button that I will add a credits scene to later.
+	- Added a back button that bring you back to the main menu.
+- Added a quit button to the main menu that closes the game.
+-Set anchors on gameobjects to make sure they stay in the right place even if the screen is resized.
+
+
+2021-06-09
+- Made 2 new art assets
+	-Dart trap which is a simple base to indicate the trap
+	-Arrow sprite which will be shot out of the dart trap
+
+2021-06-13
+-Made an arrowSpawner prefab that spawns arrows and shoots them in a certain direction.
+	-After a short delay the arrows that were spawned are destroyed.
+
+-Made an arrow prefab that has a script to give the arrow velocity when it is spawned by the spawner.
+
+2021-06-15
+-Changed the font I was using with a new one that I found on the Unity asset store
+
+-Added a box collider to tutorial signs that activates a text object when the player enters the collider
+	-Made a text prefab that shows when the player enters the collider.
+		-Added the functionality of showing the player a text dialogue when a specified key is pressed.
+		-The purpose of this is to show the player a breif explenation on controls.
+
+2021-06-16
+-Added more tutorial signs to the first level to help guide the player.
+
+-Added a test build folder so I could check for any potential issues when building the game.
+
+-Changed the color of a tree sprite to make it fir the scene better, then re-imported the image.
+
+2021-06-17
+-Continued level design for level 2
+	-Added a slight expansion to level 2 that makes the player think a bit more about their movement.
+
+-Changed the code that sets the players jump to 0 when colliding with a boundary object to reset the jump back to the normal value after they touch the ground.
+
+2021-06-21
+- Basic level design for level 2.
+
+-Worked on a way to add a delay to the arrow trap so it does not shoot as soon as the player enters the trigger
+	-Got the delay before the first shot working but the co-routine does not have a way to exit properly and gets stuck, I have a on trigger exit to stop the shooting but it does not seem to work.
+
+2021-06-22
+-Found A way to stop the arrow trap from continuously shooting by adding another co-rotuine that stops the shooting with a delay slightly longer than the shooting method to ensure the first shot is fired.
+
+-Tried fixing a bug that allows the player to jump on triggers in the scene, unfortunately I have not found a fix yet.
+
+2021-06-23
+-Added a new section to level 1
+
+2021-07-05
+-Added a new section to level 2 that is a little more challenging than any other section so far. This section uses a combination of the arrow trap and spikes trap so the player has to time their jumps.
+
+2021-07-12
+-Cleaned up level design for level 2 to give it a more uniform and clean look.
+
+2021-07-15
+-Added a script that gives the dash ability orb the functionality to respawn after the player has taken the powerup.
+
+2021-07-19
+-Added a death barrier that will kill the player if they fall off the map (this is in as a precaution to prevent infinitely falling if the player manages to fall off the level)
+
+-Added more foliage to level 1
+
+-Added a new section to level 2
+
+2021-07-21
+-Continued level design for level 2 adding a finish to the level.
+	-Placed a goal that allows the player to advance to level 3.
+
+2021-07-22
+-Added a new hazard area to level 2 that forces the player to make use of 2 seperate dash orbs to clear the obstacle.
+
+2021-07-29
+-Started working on level 3 adding a short section to start off the level
+
+-Made 2 stalagmite sprites in GIMP 
+-Modified the spikes sprite to make them look a bit more realistic.
+
+2021-08-04
+-Made a new sprite that is simply a smaller set of spikes that look cleaner on walls than the original spike sprite.
+
+-Added a small section to level 3 that makes use of the small spikes sprite.
+
+-Attempted to add 1 way platforms using platform effectors, but when jumping through a platform with this attached the player would sometimes be teleported slightly, either left or right.
+
+2021-08-05
+-Continued working on level 3.
+
+2021-08-18
+-Small changes to level 3
+-Added checkpoints to level 1, 2, and 3.
+
+-Started working on a simple checkpoint system.
+	-Got the checkpoint to update to the players position when the player collides with the checkpoint trigger.
+	-If the player dies they will spawn at the last checkpoint they collided with.
+
+2021-08-23
+-Added a new conveyor belt sprite.
+	-Added a section to level 3 that makes use of the conveyor belt
+	-To make the conveyor belt work I simply attatched a platform effector to my sprite and gave it force that pushed the player in a certain direction.

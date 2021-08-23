@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class gameManager : MonoBehaviour
 {
     public static gameManager GMinstance;
+    public Vector2 lastCheckPointPos;
 
     private void Awake()
     {
