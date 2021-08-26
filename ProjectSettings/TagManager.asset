@@ -9,6 +9,7 @@ TagManager:
   - Arrow
   - Hazard
   - GM
+  - Belt
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Arrow
   - Ground
   - deathBarrier
-  - 
+  - Belt
   - 
   - 
   - 

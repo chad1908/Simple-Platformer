@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
+    public bool conveyorCollision;
+
     public bool isJumping;
     public bool hasDash;
     public float jumpSpeed = 8f;
@@ -63,7 +65,7 @@ public class MovementController : MonoBehaviour
         else
         {
             return false;
-        }   
+        }
     }
 
     public bool isWallLeftOrRight()
@@ -163,7 +165,7 @@ public class MovementController : MonoBehaviour
         //When leftShit is pressed the player is moved 2 units in the direction of the input along the x axis.
         if (hasDash == false)
         {
-            
+            //Add code to make a text box tell the player thay have no dash.
         }
         else
         {
@@ -178,6 +180,24 @@ public class MovementController : MonoBehaviour
         }
     }
 
+    //Move to conveyor belt scirpt and add comments.
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Belt")
+        {
+            conveyorCollision = true;
+        }
+    }
+
+    //Move to conveyor belt scirpt and add comments.
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Belt")
+        {
+            conveyorCollision = false;
+        }
+    }
+
     private void FixedUpdate()
     {
         //This will be used to hold ground and air velocity values.
@@ -185,7 +205,7 @@ public class MovementController : MonoBehaviour
         var yVelocity = 0f;
 
         var acceleration = 0f;
-        if(PlayerIsGrounded())
+        if (PlayerIsGrounded())
         {
             acceleration = accel;
         }
@@ -193,8 +213,12 @@ public class MovementController : MonoBehaviour
         {
             acceleration = airAccel;
         }
-
+       
         //Normalise the xVelocity to 0 over time if there is no input to prevent the player from sliding.
+        if (conveyorCollision == true)
+        {
+            xVelocity = 4f;
+        }
         if (PlayerIsGrounded() && input.x == 0)
         {
             xVelocity = 0f;
@@ -204,6 +228,7 @@ public class MovementController : MonoBehaviour
             xVelocity = rb.velocity.x;
         }
 
+        //Normalise the yVelocity to 0 over time.
         if (isTouchingGroundOrWall() && input.y == 1)
         {
             yVelocity = jump;
@@ -217,7 +242,7 @@ public class MovementController : MonoBehaviour
         rb.AddForce(new Vector3(((input.x * speed) - rb.velocity.x) * acceleration, 0));
 
         //Controls the player velocity.
-        rb.velocity = new Vector3(xVelocity, yVelocity);
+        rb.velocity = new Vector2(xVelocity, yVelocity);
 
         if (isWallLeftOrRight() && !PlayerIsGrounded() && input.y == 1)
         {
@@ -243,5 +268,5 @@ public class MovementController : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
-    }
+    }   
 }

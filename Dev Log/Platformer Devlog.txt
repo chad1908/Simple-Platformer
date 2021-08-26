@@ -23,6 +23,8 @@ destroy goal
 destroy arrow death particle
 
 make easter egg guy have an animation of him turning around and saying hi. and warn you to be careful
+
+****add code to reset player checkpoint pos when the level is changed to prevent checkpoints not tracking player pos after level change*****
 ************************************
 
 
@@ -243,3 +245,10 @@ The movement is now a lot smoother and the player looses speed while in the air.
 -Added a new conveyor belt sprite.
 	-Added a section to level 3 that makes use of the conveyor belt
 	-To make the conveyor belt work I simply attatched a platform effector to my sprite and gave it force that pushed the player in a certain direction.
+		-After testing the conveyor belt I found it to be quiite buggy as the movement is not being preopely translated.	
+
+2021-08-26
+-Changed the conveyor belt to use a scirpt instead of the platform effectors.
+	-For this I simply add force to the players xvelocity when they come into contact with a conveyor belt.
+		-Unfortunatley this change made my code not execute properly on death, instead of playing a particle animation and respawning, the log would output that the index is outside the bounds of the array.
+			-Fixed this problem by changing the way the death particle gets instatiated by passing the players position.

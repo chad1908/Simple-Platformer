@@ -28,7 +28,9 @@ public class Hazards : MonoBehaviour
             //Debug.Log("jump set to 0");
 
             //instantiate the death particles at the point of collision.
-            Instantiate(playerDeathParticles, collision.contacts[0].point, Quaternion.identity);
+            //Instantiate(playerDeathParticles, collision.contacts[0].point, Quaternion.identity);
+
+            Instantiate(playerDeathParticles, transform.position, transform.rotation);
 
             gameManager.GMinstance.restartLevel(1.25f);
         }
