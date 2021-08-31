@@ -165,7 +165,7 @@ public class MovementController : MonoBehaviour
         //When leftShit is pressed the player is moved 2 units in the direction of the input along the x axis.
         if (hasDash == false)
         {
-            //Add code to make a text box tell the player thay have no dash.
+            //Add code to make a text box tell the player they have no dash.
         }
         else
         {
@@ -221,7 +221,7 @@ public class MovementController : MonoBehaviour
         }
         if (PlayerIsGrounded() && input.x == 0)
         {
-            xVelocity = 0f;
+            //xVelocity = 0f;
         }
         else
         {

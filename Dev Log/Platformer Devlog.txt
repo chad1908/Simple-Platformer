@@ -252,3 +252,10 @@ The movement is now a lot smoother and the player looses speed while in the air.
 	-For this I simply add force to the players xvelocity when they come into contact with a conveyor belt.
 		-Unfortunatley this change made my code not execute properly on death, instead of playing a particle animation and respawning, the log would output that the index is outside the bounds of the array.
 			-Fixed this problem by changing the way the death particle gets instatiated by passing the players position.
+
+2021-08-31
+-Fixed a problem where my checkpoints were not tracking the players position on any other level but the first.
+
+-For some reason the conveyor belt that I had in Level 3 stopped working so I had to make a small change to my code in order to fix it.
+	-The problem was being caused by a ground check that set my players velocity to 0, and was overiding the velocity being set by the conveyor belt.
+

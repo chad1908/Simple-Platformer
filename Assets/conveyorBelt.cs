@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class conveyorBelt : MonoBehaviour
 {
-   // public bool conveyorCollision;
+    //public bool conveyorCollision;
 
     ////Move to conveyor belt scirpt and add comments.
     //private void OnCollisionEnter2D(Collision2D collision)
