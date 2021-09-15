@@ -22,17 +22,20 @@ public class MovementController : MonoBehaviour
     private float height;
     public Animator animator;
     public GameObject dashEffect;
+    public GameObject wallSpawn;
     private Vector3 input;
     private SpriteRenderer sr;
     private Rigidbody2D rb;
+
+    public Animator wallMove1;
+    public Animator wallMove2;
     //Transform arrowTrapPrefab;
 
 
-    //public void Start()
-    //{
-    //    var Trap = Instantiate(arrowTrapPrefab) as Transform;
-    //    Physics2D.IgnoreCollision()
-    //}
+    public void Start()
+    {
+        wallSpawn.SetActive(false);
+    }
 
     private void Awake()
     {
@@ -43,6 +46,9 @@ public class MovementController : MonoBehaviour
         //Grabs the width and height of the sprite and adds some padding.
         width = GetComponent<Collider2D>().bounds.extents.x + 0.1f;
         height = GetComponent<Collider2D>().bounds.extents.y + 0.2f;
+
+
+        
     }
 
     public bool PlayerIsGrounded()
@@ -180,6 +186,26 @@ public class MovementController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "spikeWall1")
+        {
+            GameObject spikeWall1 = GameObject.Find("spikeWall (1)");
+            Animator spikeWallAnimator = spikeWall1.GetComponent<Animator>();
+            wallMove1.SetBool("wallTrigger(1)", true);
+
+            //Spawns a wall that creates a path for the player to get around an obstacle.
+            wallSpawn.SetActive(true);
+        }
+
+        if (collision.gameObject.tag == "spikeWall2")
+        {
+            GameObject spikeWall2 = GameObject.Find("spikeWall (2)");
+            Animator spikeWallAnimator = spikeWall2.GetComponent<Animator>();
+            wallMove2.SetBool("wallTrigger(2)", true);
+        }
+    }
+
     //Move to conveyor belt scirpt and add comments.
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -268,5 +294,7 @@ public class MovementController : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
-    }   
+    }
+
+
 }

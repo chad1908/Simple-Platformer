@@ -10,6 +10,8 @@ TagManager:
   - Hazard
   - GM
   - Belt
+  - spikeWall1
+  - spikeWall2
   layers:
   - Default
   - TransparentFX

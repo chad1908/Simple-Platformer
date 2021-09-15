@@ -259,3 +259,14 @@ The movement is now a lot smoother and the player looses speed while in the air.
 -For some reason the conveyor belt that I had in Level 3 stopped working so I had to make a small change to my code in order to fix it.
 	-The problem was being caused by a ground check that set my players velocity to 0, and was overiding the velocity being set by the conveyor belt.
 
+2021-09-08
+-Added a elevator that is used to carry the player to a part of the level they cannot reach.
+	-elevators will often be trapped in some way.
+		-I made a platform gameobject and used an animation to simulate the motion of an elevator.
+		-Using a script I made it so on collision the player becomes a child of the platform to prevent movement bugs.
+		-To prevent the player from getting stuck on the platform I made it so when the spacebar is pressed the player becomes unchilded from the platform.
+
+2021-09-09
+-Added a new hazard to the game
+	-Added a spike wall that moves towards the player when a ceratain trigger is activated.
+	-This also spawns a wall that allows the player to jump over the obstacle.
